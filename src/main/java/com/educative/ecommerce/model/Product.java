@@ -25,13 +25,19 @@ public class Product {
     private @NotNull double price;
     private @NotNull String description;
 
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "category_id", nullable = false)
+    Category category;
 
-    public Product(String name, String imageURL, double price, String description) {
+
+    public Product(String name, String imageURL, double price, String description, Category category) {
         super();
         this.name = name;
         this.imageURL = imageURL;
         this.price = price;
         this.description = description;
+        this.category = category;
     }
 
     public Product() {
@@ -77,6 +83,14 @@ public class Product {
         this.description = description;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -88,3 +102,5 @@ public class Product {
                 '}';
     }
 }
+
+
